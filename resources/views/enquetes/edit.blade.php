@@ -7,9 +7,9 @@
         <title>Editar Enquete</title>
     </head>
     <body>
-        <div class="flex min-h-screen ">
+        <div class="flex min-h-screen text-xl">
             <form class="m-auto" action="{{ route('enquetes.update',$enquete->id) }}" method="POST" enctype="multipart/form-data">
-            <div class="grid container grid-cols-3 gap-2 m-auto">
+            <div id="form-container" class="grid container grid-cols-3 gap-2 m-auto rounded border border-black p-8">
                 @csrf
                 @method('PUT')
                 <div>
@@ -33,14 +33,14 @@
                 @error('termino')
                     <p class="text-red-600 text-sm">Data de termino nao pode ser vazio</p>
                 @enderror
-                @foreach ($respostas as $resposta)
+                @foreach ($respostas as $key => $resposta)
                 <div>
-                    <label class="block" for="">Resposta</label>
+                    <label class="block" for="">Resposta {{ $key + 1 }}</label>
                     <input class="rounded border boder-black px-1" type="text" name={{ "respostas[".$resposta["id"]."]" }} value="{{ $resposta["resposta"] }}">
                 </div>
                 @endforeach
                 <div class="col-span-3 text-center">
-                    <button class="bg-black text-white rounded px-2 py-1" type="submit">Atualizar</button>
+                    <button class="bg-black text-white rounded p-1" type="submit">Atualizar</button>
                 </div>
             </div>
         </form>

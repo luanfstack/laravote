@@ -8,21 +8,24 @@
     </head>
     <body>
         <div class="flex min-h-screen">
-            <div class="m-auto bg-red-500">
+            <div class="m-auto text-xl text-center">
                 @if (count($enquetes) == 0)
-                    <div class="text-center">
-                        <p class="">Nenhuma Enquete</p>
+                    <div>
+                        <p>Nenhuma Enquete</p>
+                        <a href="/enquetes/create">
+                            <button class="bg-blue-600 text-white rounded p-1 m-1">Criar Nova Enquete</button>
+                        </a>
                     </div>
                 @else
-                <table class="table-auto m-auto">
+                <table>
                     <thead>
                         <tr>
-                            <th>Titulo</th>
-                            <th>Inicio</th>
-                            <th>Termino</th>
-                            <th>
+                            <th class="border border-black">Titulo</th>
+                            <th class="border border-black">Inicio</th>
+                            <th class="border border-black">Termino</th>
+                            <th class="border border-black">
                                 <a href="/enquetes/create">
-                                    <button class="bg-black text-white rounded px-2 py1">Criar Nova Enquete</button>
+                                    <button class="bg-blue-600 text-white rounded p-1 m-1">Criar Nova Enquete</button>
                                 </a>
                             </th>
                         </tr>
@@ -30,18 +33,22 @@
                     <tbody>
                         @foreach ($enquetes as $enquete)
                             <tr>
-                                <td>{{ $enquete->titulo }}</td>
-                                <td>{{ date_format(date_create($enquete->inicio), 'd-m-Y') }}</td>
-                                <td>{{ date_format(date_create($enquete->termino), 'd-m-Y') }}</td>
-                                <td>
+                                <td class="px-8 py-1 border border-black">{{ $enquete->titulo }}</td>
+                                <td class="px-8 py-1 border border-black">{{ date_format(date_create($enquete->inicio), 'd-M-Y') }}</td>
+                                <td class="px-8 py-1 border border-black">{{ date_format(date_create($enquete->termino), 'd-M-Y') }}</td>
+                                <td class="px-8 py-1 border border-black">
                                     <form action="{{ route('enquetes.destroy',$enquete->id) }}" method="Post">
-                                    <a href="{{ route('enquetes.show',$enquete->id) }}">Ver</a>
+                                    <a href="{{ route('enquetes.show',$enquete->id) }}">
+                                        <button type="button" class="bg-green-600 rounded text-white p-1 mx-1 w-16">Ver</button>
+                                    </a>
                                     @if (date('Y-m-d') < $enquete->inicio )
-                                        <a href="{{ route('enquetes.edit',$enquete->id) }}">Editar</a>
+                                        <a href="{{ route('enquetes.edit',$enquete->id) }}">
+                                            <button type="button" class="bg-yellow-300 rounded p-1 m-1 w-16">Editar</button>
+                                        </a>
                                     @endif
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit">Deletar</button>
+                                        <button class="bg-red-600 rounded text-white p-1 mx-1" type="submit">Deletar</button>
                                     </form>
                                 </td>
                             </tr>

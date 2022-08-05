@@ -14,8 +14,6 @@ use App\Http\Controllers\EnqueteController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', 'enquetes');
 
 Route::resource('enquetes', EnqueteController::class);

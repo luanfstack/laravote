@@ -8,31 +8,34 @@
     </head>
     <body>
         <div class="flex min-h-screen">
-            <div class="container m-auto">
-                <div class="text-center">
-                    {{ $enquete->titulo }} - {{ date_format(date_create($enquete->inicio), 'd-m-Y') }} - {{ date_format(date_create($enquete->termino), 'd-m-Y') }}
+            <div class="container m-auto text-xl">
+                <div class="text-center my-2">
+                    <p class="py-2">{{ $enquete->titulo }}</p>
+                    <p class="py-2">
+                        ({{ date_format(date_create($enquete->inicio), 'd-M-Y') }}/{{ date_format(date_create($enquete->termino), 'd-M-Y') }})
+                    </p>
                 </div>
                 <table class="m-auto">
                     <thead>
                         <tr>
-                            <th>Resposta</th>
-                            <th>Votos</th>
+                            <th class="px-8 py-1 border border-black">Resposta</th>
+                            <th class="px-8 py-1 border border-black">Votos</th>
                             @if (date('Y-m-d') >= $enquete->inicio and date('Y-m-d') <= $enquete->termino)
-                                <th>Actions</th>
+                                <th class="px-8 py-1 border border-black">Actions</th>
                             @endif
                         </tr>
                     </thead>
                     @foreach ($respostas as $resposta)
                         <tr>
-                            <td>{{ $resposta["resposta"] }}</td>
-                            <td>{{ $resposta["votes"] }}</td>
+                            <td class="px-8 py-1 border border-black">{{ $resposta["resposta"] }}</td>
+                            <td class="px-8 py-1 border border-black">{{ $resposta["votes"] }}</td>
                             @if (date('Y-m-d') >= $enquete->inicio and date('Y-m-d') <= $enquete->termino)
-                                <td>
+                                <td class="px-8 py-1 border border-black">
                                     <form action="{{ route('enquetes.update', $enquete->id) }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="resposta_id" value="{{ $resposta["id"] }}">
-                                        <button>Votar</button>
+                                        <button class="rounded bg-black text-white p-1">Votar</button>
                                     </form>
                                 </td>
                             @endif

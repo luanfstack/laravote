@@ -29,13 +29,12 @@
         </script>
     </head>
     <body>
-        <div class="flex min-h-screen">
-
-            <form class="m-auto" action="{{ route('enquetes.store') }}" method="POST">
+        <div class="flex min-h-screen text-xl">
+            <form class="m-auto rounded border border-black p-8" action="{{ route('enquetes.store') }}" method="POST">
             @csrf
             <div class="grid gap-2 container grid-cols-3" id="form-container">
-                <div class="col-span-3 text-center" onclick="addField()">
-                    <button class="bg-black text-white rounded px-2 py-1">Adicionar Alternativa</button>
+                <div class="col-span-3 text-center">
+                    <button type="button" class="bg-black text-white rounded px-2 py-1" onclick="addField()">Adicionar Alternativa</button>
                 </div>
                 <div>
                     <label class="block" for="titulo">Titulo da enquete</label>

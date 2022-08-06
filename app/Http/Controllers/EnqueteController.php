@@ -28,14 +28,14 @@ class EnqueteController extends Controller
             'inicio' => $request->get('inicio'),
             'termino' => $request->get('termino'),
         ]);
-        foreach($request->get('respostas') as $resposta){
+        foreach($request->get('respostas') as $texto){
             Resposta::create([
                 'enquete_id' => $enquete->id,
-                'resposta' => $resposta,
+                'resposta' => $texto,
                 'votes' => 0,
             ]);
         }
-        return redirect()->route('enquetes.index')->with('sucesso', 'A enquete foi criada com sucesso.');
+        return redirect()->route('enquetes.index');
     }
 
     public function show(Enquete $enquete){
@@ -51,7 +51,8 @@ class EnqueteController extends Controller
     public function update(Request $request, Enquete $enquete){
         if($request->get('resposta_id')){
             Resposta::where('id', $request->get('resposta_id'))->increment('votes');
-            return redirect()->route('enquetes.show', $enquete->id)->with('sucesso', 'Seu voto foi contabilizado com sucesso');
+            event(new VoteEvent('vote'));
+            return redirect()->route('enquetes.index', $enquete->id);
         }
         $request->validate([
             'titulo' => 'required',
@@ -59,19 +60,19 @@ class EnqueteController extends Controller
             'termino' => 'required',
             'respostas.*' => 'required',
         ]);
-        foreach($request->get('respostas') as $id =>$resposta){
-            Resposta::where('id', $id)->update(['resposta' => $resposta]);
+        foreach($request->get('respostas') as $id => $texto){
+            Resposta::where('id', $id)->update(['resposta' => $texto]);
         }
         $enquete->fill([
             'titulo' => $request->get('titulo'),
             'inicio' => $request->get('inicio'),
             'termino' => $request->get('termino'),
         ])->save();
-        return redirect()->route('enquetes.index')->with('sucesso', 'A enquete foi atualizada com sucesso.');
+        return redirect()->route('enquetes.index');
     }
 
     public function destroy(Enquete $enquete){
         $enquete->delete();
-        return redirect()->route('enquetes.index')->with('sucesso', 'A enquete foi removida com sucesso.');
+        return redirect()->route('enquetes.index');
     }
 }

@@ -10,7 +10,7 @@
         <div class="flex min-h-screen">
             <div class="container m-auto text-xl">
                 <div class="text-center my-2">
-                    <p class="py-2">{{ $enquete->titulo }}</p>
+                    <span class="py-2">{{ $enquete->titulo }}</span>
                     <p class="py-2">
                         ({{ date_format(date_create($enquete->inicio), 'd-M-Y') }}/{{ date_format(date_create($enquete->termino), 'd-M-Y') }})
                     </p>
@@ -28,7 +28,7 @@
                     @foreach ($respostas as $resposta)
                         <tr>
                             <td class="px-8 py-1 border border-black">{{ $resposta["resposta"] }}</td>
-                            <td class="px-8 py-1 border border-black">{{ $resposta["votes"] }}</td>
+                            <td class="px-8 py-1 border border-black">{{ $resposta["votos"] }}</td>
                             @if (date('Y-m-d') >= $enquete->inicio and date('Y-m-d') <= $enquete->termino)
                                 <td class="px-8 py-1 border border-black">
                                     <form action="{{ route('enquetes.update', $enquete->id) }}" method="post" enctype="multipart/form-data">
@@ -41,6 +41,11 @@
                             @endif
                         </tr>
                     @endforeach
+                    <tr>
+                        <td>
+                            <a href="{{ route('enquetes.index') }}">Enquetes</a>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>

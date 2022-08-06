@@ -8,8 +8,14 @@
     </head>
     <body>
         <div class="flex min-h-screen text-xl">
-            <form class="m-auto" action="{{ route('enquetes.update',$enquete->id) }}" method="POST" enctype="multipart/form-data">
-            <div id="form-container" class="grid container grid-cols-3 gap-2 m-auto rounded border border-black p-8">
+            <form class="m-auto rounded border border-black p-8" action="{{ route('enquetes.update',$enquete->id) }}" method="POST" enctype="multipart/form-data">
+            <div class="sticky top-0 left-0">
+                <a href="{{ route('enquetes.index') }}">
+                     <button class="rounded bg-black text-white p-1" type="button">Voltar</button>
+                </a>
+            </div>
+            <div id="form-container" class="grid container grid-cols-3 gap-2 p-8">
+
                 @csrf
                 @method('PUT')
                 <div>

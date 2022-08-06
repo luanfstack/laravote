@@ -30,11 +30,17 @@
     </head>
     <body>
         <div class="flex min-h-screen text-xl">
+
             <form class="m-auto rounded border border-black p-8" action="{{ route('enquetes.store') }}" method="POST">
+            <div class="sticky top-0 left-0">
+                <a href="{{ route('enquetes.index') }}">
+                     <button class="rounded bg-black text-white p-1" type="button">Voltar</button>
+                </a>
+            </div>
             @csrf
             <div class="grid gap-2 container grid-cols-3" id="form-container">
                 <div class="col-span-3 text-center">
-                    <button type="button" class="bg-black text-white rounded px-2 py-1" onclick="addField()">Adicionar Alternativa</button>
+                    <button type="button" class="bg-black text-white rounded px-2 py-1" onclick="addField()">Adicionar Resposta</button>
                 </div>
                 <div>
                     <label class="block" for="titulo">Titulo da enquete</label>

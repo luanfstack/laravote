@@ -5,6 +5,7 @@ use App\Models\Enquete;
 use App\Models\Resposta;
 use Illuminate\Http\Request;
 
+
 class EnqueteController extends Controller
 {
     public function index(){
@@ -31,8 +32,8 @@ class EnqueteController extends Controller
         foreach($request->get('respostas') as $texto){
             Resposta::create([
                 'enquete_id' => $enquete->id,
-                'resposta' => $texto,
-                'votes' => 0,
+                'texto' => $texto,
+                'votos' => 0,
             ]);
         }
         return redirect()->route('enquetes.index');
@@ -50,9 +51,8 @@ class EnqueteController extends Controller
 
     public function update(Request $request, Enquete $enquete){
         if($request->get('resposta_id')){
-            Resposta::where('id', $request->get('resposta_id'))->increment('votes');
-            event(new VoteEvent('vote'));
-            return redirect()->route('enquetes.index', $enquete->id);
+            Resposta::where('id', $request->get('resposta_id'))->increment('votos');
+            return redirect()->route('enquetes.show', $enquete->id);
         }
         $request->validate([
             'titulo' => 'required',
@@ -61,7 +61,7 @@ class EnqueteController extends Controller
             'respostas.*' => 'required',
         ]);
         foreach($request->get('respostas') as $id => $texto){
-            Resposta::where('id', $id)->update(['resposta' => $texto]);
+            Resposta::where('id', $id)->update(['texto' => $texto]);
         }
         $enquete->fill([
             'titulo' => $request->get('titulo'),

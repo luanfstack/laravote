@@ -27,7 +27,7 @@
                     </thead>
                     @foreach ($respostas as $resposta)
                         <tr>
-                            <td class="px-8 py-1 border border-black">{{ $resposta["resposta"] }}</td>
+                            <td class="px-8 py-1 border border-black">{{ $resposta["texto"] }}</td>
                             <td class="px-8 py-1 border border-black">{{ $resposta["votos"] }}</td>
                             @if (date('Y-m-d') >= $enquete->inicio and date('Y-m-d') <= $enquete->termino)
                                 <td class="px-8 py-1 border border-black">

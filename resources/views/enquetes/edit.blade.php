@@ -42,7 +42,7 @@
                 @foreach ($respostas as $key => $resposta)
                 <div>
                     <label class="block" for="">Resposta {{ $key + 1 }}</label>
-                    <input class="rounded border boder-black px-1" type="text" name={{ "respostas[".$resposta["id"]."]" }} value="{{ $resposta["resposta"] }}">
+                    <input class="rounded border boder-black px-1" type="text" name={{ "respostas[".$resposta["id"]."]" }} value="{{ $resposta["texto"] }}">
                 </div>
                 @endforeach
                 <div class="col-span-3 text-center">

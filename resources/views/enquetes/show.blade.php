@@ -12,7 +12,7 @@
                 <div class="text-center my-2">
                     <span class="py-2">{{ $enquete->titulo }}</span>
                     <p class="py-2">
-                        ({{ date_format(date_create($enquete->inicio), 'd-M-Y') }}/{{ date_format(date_create($enquete->termino), 'd-M-Y') }})
+                        {{ date_format(date_create($enquete->inicio), 'd-M-Y') }} ~ {{ date_format(date_create($enquete->termino), 'd-M-Y') }}
                     </p>
                 </div>
                 <table class="m-auto">
@@ -21,7 +21,7 @@
                             <th class="px-8 py-1 border border-black">Resposta</th>
                             <th class="px-8 py-1 border border-black">Votos</th>
                             @if (date('Y-m-d') >= $enquete->inicio and date('Y-m-d') <= $enquete->termino)
-                                <th class="px-8 py-1 border border-black">Actions</th>
+                                <th class="px-8 py-1 border border-black"></th>
                             @endif
                         </tr>
                     </thead>
@@ -43,7 +43,9 @@
                     @endforeach
                     <tr>
                         <td>
-                            <a href="{{ route('enquetes.index') }}">Enquetes</a>
+                            <a href="{{ route('enquetes.index') }}">
+                                <button class="rounded bg-black text-white p-1 m-1">Home</button>
+                            </a>
                         </td>
                     </tr>
                 </table>

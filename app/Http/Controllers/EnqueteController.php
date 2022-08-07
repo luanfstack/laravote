@@ -54,7 +54,7 @@ class EnqueteController extends Controller
         if($request->get('resposta_id')){
             Voted::dispatch($request->get('resposta_id'));
             Resposta::where('id', $request->get('resposta_id'))->increment('votos');
-            return redirect()->route('enquetes.show', $enquete->id);
+            return redirect()->route('enquetes.index', $enquete->id);
         }
         $request->validate([
             'titulo' => 'required',

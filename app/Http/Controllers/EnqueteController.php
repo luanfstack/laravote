@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Enquete;
 use App\Models\Resposta;
 use Illuminate\Http\Request;
+use App\Events\Voted;
 
 
 class EnqueteController extends Controller
@@ -51,6 +52,7 @@ class EnqueteController extends Controller
 
     public function update(Request $request, Enquete $enquete){
         if($request->get('resposta_id')){
+            Voted::dispatch($request->get('resposta_id'));
             Resposta::where('id', $request->get('resposta_id'))->increment('votos');
             return redirect()->route('enquetes.show', $enquete->id);
         }

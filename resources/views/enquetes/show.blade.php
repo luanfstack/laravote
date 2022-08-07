@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        @vite('resources/css/app.css')
+        @vite(['resources/css/app.css', 'resources/js/app.js' ])
         <title>Votar Enquete</title>
     </head>
     <body>
@@ -28,7 +28,7 @@
                     @foreach ($respostas as $resposta)
                         <tr>
                             <td class="px-8 py-1 border border-black">{{ $resposta["texto"] }}</td>
-                            <td class="px-8 py-1 border border-black">{{ $resposta["votos"] }}</td>
+                            <td id="{{ $resposta["id"] }}" class="px-8 py-1 border border-black">{{ $resposta["votos"] }}</td>
                             @if (date('Y-m-d') >= $enquete->inicio and date('Y-m-d') <= $enquete->termino)
                                 <td class="px-8 py-1 border border-black">
                                     <form action="{{ route('enquetes.update', $enquete->id) }}" method="post" enctype="multipart/form-data">

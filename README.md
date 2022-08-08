@@ -2,7 +2,7 @@
 
 Feito com [Laravel](https://laravel.com/), [TailwindCSS](https://tailwindcss.com/) e [Docker](https://www.docker.com/)
 
-## Rodar Local
+## Rodar Localamente
 
 Clone o repositorio e copie o arquivo .env.example para .env.
 

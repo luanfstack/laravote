@@ -5,9 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         @vite('resources/css/app.css')
         <title>Enquetes</title>
+        <script>
+            setTimeout(() => {
+                const notification = document.getElementById("notification");
+                notification.remove();
+            }, 3000);
+        </script>
     </head>
     <body>
         <div class="flex min-h-screen">
+            @if (Session::has('success'))
+                <div class="absolute top-0 left-0 text-center w-screen mt-8 font-bold z-50">
+                    <button id="notification" class="bg-black text-white rounded-xl w-fit px-8 py-1">{{ Session::get('success') }}</button>
+                </div>
+            @endif
             <div class="m-auto text-xl text-center">
                 @if (count($enquetes) == 0)
                     <div>

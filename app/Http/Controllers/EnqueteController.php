@@ -37,7 +37,7 @@ class EnqueteController extends Controller
                 'votos' => 0,
             ]);
         }
-        return redirect()->route('enquetes.index');
+        return redirect()->route('enquetes.index')->with('success', 'Enquete criada com sucesso!');
     }
 
     public function show(Enquete $enquete){
@@ -54,7 +54,7 @@ class EnqueteController extends Controller
         if($request->get('resposta_id')){
             Voted::dispatch($request->get('resposta_id'));
             Resposta::where('id', $request->get('resposta_id'))->increment('votos');
-            return redirect()->route('enquetes.index', $enquete->id);
+            return redirect()->route('enquetes.index', $enquete->id)->with('success', 'Voto realizado com sucesso!');
         }
         $request->validate([
             'titulo' => 'required',
@@ -70,11 +70,11 @@ class EnqueteController extends Controller
             'inicio' => $request->get('inicio'),
             'termino' => $request->get('termino'),
         ])->save();
-        return redirect()->route('enquetes.index');
+        return redirect()->route('enquetes.index')->with('success', 'Enquete editada com sucesso!');
     }
 
     public function destroy(Enquete $enquete){
         $enquete->delete();
-        return redirect()->route('enquetes.index');
+        return redirect()->route('enquetes.index')->with('success', 'Enquete deletada com sucesso!');
     }
 }

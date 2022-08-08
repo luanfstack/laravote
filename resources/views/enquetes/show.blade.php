@@ -12,7 +12,7 @@
                 <div class="text-center my-2">
                     <span class="py-2">{{ $enquete->titulo }}</span>
                     <p class="py-2">
-                        {{ date_format(date_create($enquete->inicio), 'd-M-Y') }} ~ {{ date_format(date_create($enquete->termino), 'd-M-Y') }}
+                        {{ date_format(date_create($enquete->inicio), 'm-Y') }} ~ {{ date_format(date_create($enquete->termino), 'd-m-Y') }}
                     </p>
                 </div>
                 <table class="m-auto">

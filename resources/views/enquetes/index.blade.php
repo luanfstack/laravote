@@ -45,8 +45,8 @@
                         @foreach ($enquetes as $enquete)
                             <tr>
                                 <td class="px-8 py-1 border border-black">{{ $enquete->titulo }}</td>
-                                <td class="px-8 py-1 border border-black">{{ date_format(date_create($enquete->inicio), 'd-M-Y') }}</td>
-                                <td class="px-8 py-1 border border-black">{{ date_format(date_create($enquete->termino), 'd-M-Y') }}</td>
+                                <td class="px-8 py-1 border border-black">{{ date_format(date_create($enquete->inicio), 'd-m-Y') }}</td>
+                                <td class="px-8 py-1 border border-black">{{ date_format(date_create($enquete->termino), 'd-m-Y') }}</td>
                                 <td class="px-8 py-1 border border-black">
                                     <form action="{{ route('enquetes.destroy',$enquete->id) }}" method="Post">
                                     <a href="{{ route('enquetes.show',$enquete->id) }}">
